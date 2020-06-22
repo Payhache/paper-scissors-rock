@@ -2,15 +2,13 @@ const launchGame = function () {
   let result;
   let playerScore = 0;
   let computerScore = 0;
-  // Selection des choix possible par #id
+  // Selection des choix possibles par #id
   const choices = document.querySelectorAll(".choice");
-  // Selection des scores (parsé  pour pouvoir  l'incrémenter):
+  // Selection des scores :
   const playerScoreSPan = document.getElementById("user-score");
   const computerScoreSpan = document.getElementById("computer-score");
   // Selection du texte pour annoncer le résultat :
   let resultSentence = document.querySelector(".result");
-  console.log(resultSentence);
-
   //Fonction lancée pour obtenir le choix de l'ordinateur
   const randomComputerChoice = function (randomChoice) {
     return choices[randomChoice].id;
