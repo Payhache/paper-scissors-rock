@@ -2,7 +2,8 @@ const launchGame = function () {
   let result;
   let playerScore = 0;
   let computerScore = 0;
-  let gameLimit = 10;
+  // Definit le nombre de parties à gagner 
+  let gameLimit = 3;
   
   // Selection des choix possibles par #id
   const choices = document.querySelectorAll(".choice");
@@ -29,15 +30,6 @@ tableau afin de récuperer le click  sur chaque élément */
       // Affectation du choix de l'ordinateur
       computerChoice = randomComputerChoice(randomChoice);
       // lancement du jeu
-      // reset du jeu avec le score:
-      if(computerScore == gameLimit || playerScore == gameLimit) {
-        if(computerScore > playerScore) {
-          alert("Vous avez perdu !!! ");
-        } else {
-          alert("Bravo vous avez gagné !!!");
-        }
-        resetGame();
-      }
       // reset jeu avec le bouton
         // selection du bouton reset :
   const btnReset = document.querySelector(".btn-reset");
@@ -48,7 +40,7 @@ tableau afin de récuperer le click  sur chaque élément */
       // Affichage du résultat
       // Pas de vainqueur
       if (result === "tie") {
-        resultSentence.textContent = "Egalité recommence !";
+        resultSentence.textContent = "Egalité recommence !";resultSentence.textContent = "Egalité recommence !";
         // Ajoute couleur grise autour du choix en cas de bonne réponse
         document.getElementById(playerChoice).classList.add("grey-glow");
         // Efface la couleur grise aprés quelques secondes
@@ -86,6 +78,16 @@ tableau afin de récuperer le click  sur chaque élément */
         // Fin joueur perd
       }
       console.log(playerScore, computerScore);
+            // reset du jeu avec le score:
+            if(computerScore == gameLimit || playerScore == gameLimit) {
+              if(computerScore > playerScore) {
+                resultSentence.textContent = "Vous avez perdu";
+              } else {
+                resultSentence.textContent = "Vous avez gagné";
+              }
+              // attend 2 seconde avant de reset le game pour permettre l'affichage du score
+              setTimeout(resetGame,2000);
+            }
       
     });
   }
