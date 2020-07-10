@@ -81,9 +81,9 @@ tableau afin de récuperer le click  sur chaque élément */
             // reset du jeu avec le score:
             if(computerScore == gameLimit || playerScore == gameLimit) {
               if(computerScore > playerScore) {
-                resultSentence.textContent = "Vous avez perdu";
+                resultSentence.textContent = "Tu as perdu  la partie";
               } else {
-                resultSentence.textContent = "Vous avez gagné";
+                resultSentence.textContent = "Tu as gagné la partie";
               }
               // attend 2 seconde avant de reset le game pour permettre l'affichage du score
               setTimeout(resetGame,2000);
