@@ -2,6 +2,8 @@ const launchGame = function () {
   let result;
   let playerScore = 0;
   let computerScore = 0;
+  let gameLimit = 10;
+  
   // Selection des choix possibles par #id
   const choices = document.querySelectorAll(".choice");
   // Selection des scores :
@@ -27,6 +29,21 @@ tableau afin de récuperer le click  sur chaque élément */
       // Affectation du choix de l'ordinateur
       computerChoice = randomComputerChoice(randomChoice);
       // lancement du jeu
+      // reset du jeu avec le score:
+      if(computerScore == gameLimit || playerScore == gameLimit) {
+        if(computerScore > playerScore) {
+          alert("Vous avez perdu !!! ");
+        } else {
+          alert("Bravo vous avez gagné !!!");
+        }
+        resetGame();
+      }
+      // reset jeu avec le bouton
+        // selection du bouton reset :
+  const btnReset = document.querySelector(".btn-reset");
+  btnReset.addEventListener("click", resetGame);
+
+    
       game(playerChoice, computerChoice);
       // Affichage du résultat
       // Pas de vainqueur
@@ -68,6 +85,8 @@ tableau afin de récuperer le click  sur chaque élément */
         }, 1000);
         // Fin joueur perd
       }
+      console.log(playerScore, computerScore);
+      
     });
   }
   // Comparaison des résultats :
@@ -94,6 +113,13 @@ tableau afin de récuperer le click  sur chaque élément */
     if (letter === "r") return " la Pierre";
     if (letter === "p") return " le Papier";
     if (letter === "c") return "les Ciseaux";
+  }
+  // Fonction pour reset le jeu
+  function resetGame(){
+    playerScore =  0;
+    computerScore = 0;
+    computerScoreSpan.textContent = computerScore;
+    playerScoreSPan.textContent = playerScore;
   }
 };
 
