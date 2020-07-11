@@ -2,9 +2,10 @@ const launchGame = function () {
   let result;
   let playerScore = 0;
   let computerScore = 0;
-  // Definit le nombre de parties à gagner 
+  // Definit le nombre de parties à gagner
   let gameLimit = 3;
-  
+  // Selection de l'image a changer pour afficher choix comp
+  const computerChoiceImage = document.getElementById("imgComputerChoice");
   // Selection des choix possibles par #id
   const choices = document.querySelectorAll(".choice");
   // Selection des scores :
@@ -31,16 +32,29 @@ tableau afin de récuperer le click  sur chaque élément */
       computerChoice = randomComputerChoice(randomChoice);
       // lancement du jeu
       // reset jeu avec le bouton
-        // selection du bouton reset :
-  const btnReset = document.querySelector(".btn-reset");
-  btnReset.addEventListener("click", resetGame);
+      // selection du bouton reset :
+      const btnReset = document.querySelector(".btn-reset");
+      btnReset.addEventListener("click", resetGame);
+      // Gestion de l'affichage de l'image computer :
+      // Choix computer = rock
+      if(computerChoice === "r"){
+        computerChoiceImage.setAttribute("src", "img/pierre.png");
+      }
+      // Choix computer = paper
+      if(computerChoice === "p"){
+        computerChoiceImage.setAttribute("src", "img/feuille.png");
+      }
+      // Choix computer = cissors
+      if(computerChoice === "c"){
+        computerChoiceImage.setAttribute("src", "img/ciseau.png");
+      }
 
-    
+      // Lancement de la fonction game pour Affichage du résultat
       game(playerChoice, computerChoice);
-      // Affichage du résultat
+      
       // Pas de vainqueur
       if (result === "tie") {
-        resultSentence.textContent = "Egalité recommence !";resultSentence.textContent = "Egalité recommence !";
+        resultSentence.textContent = "Egalité recommence !";
         // Ajoute couleur grise autour du choix en cas de bonne réponse
         document.getElementById(playerChoice).classList.add("grey-glow");
         // Efface la couleur grise aprés quelques secondes
@@ -50,7 +64,9 @@ tableau afin de récuperer le click  sur chaque élément */
         // Fin pas de vainqueur
         // Joueur Gagne
       } else if (result === "win") {
+        // Incrématation du score joueur en cas de victoire
         playerScore++;
+        // Affichage du score du joueur
         playerScoreSPan.textContent = playerScore;
         resultSentence.textContent = ` Tu marques un point !  ${convertToWord(
           playerChoice
@@ -77,18 +93,18 @@ tableau afin de récuperer le click  sur chaque élément */
         }, 1000);
         // Fin joueur perd
       }
-      console.log(playerScore, computerScore);
-            // reset du jeu avec le score:
-            if(computerScore == gameLimit || playerScore == gameLimit) {
-              if(computerScore > playerScore) {
-                resultSentence.textContent = "Tu as perdu  la partie";
-              } else {
-                resultSentence.textContent = "Tu as gagné la partie";
-              }
-              // attend 2 seconde avant de reset le game pour permettre l'affichage du score
-              setTimeout(resetGame,2000);
-            }
-      
+      // reset du jeu avec le score:
+      if (computerScore == gameLimit || playerScore == gameLimit) {
+        if (computerScore > playerScore) {
+          resultSentence.textContent = "Tu as perdu  la partie";
+        } else {
+          resultSentence.textContent = "Tu as gagné la partie";
+        }
+        // attend 2 seconde avant de reset le game pour permettre l'affichage du score
+        setTimeout(resetGame, 2000);
+      }
+     
+
     });
   }
   // Comparaison des résultats :
@@ -117,8 +133,8 @@ tableau afin de récuperer le click  sur chaque élément */
     if (letter === "c") return "les Ciseaux";
   }
   // Fonction pour reset le jeu
-  function resetGame(){
-    playerScore =  0;
+  function resetGame() {
+    playerScore = 0;
     computerScore = 0;
     computerScoreSpan.textContent = computerScore;
     playerScoreSPan.textContent = playerScore;
